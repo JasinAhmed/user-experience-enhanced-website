@@ -1,0 +1,122 @@
+:root{
+  /* KLEUREN (merk) */
+  --merk-900:#000C1A;
+  --merk-800:#0B1220;
+  --merk-700:#002A5C;
+  --merk-500:#0058C2;
+  --merk-400:#006FF5;
+  --merk-100:#C2DDFF;
+
+  /* ACCENT */
+  --accent-600:#CD3618;
+  --accent-500:#E75234;
+
+  /* NEUTRALS */
+  --n-900:#13171D;
+  --n-500:#2F3B4A;
+  --n-100:#D2D5D9;
+  --n-050:#FAFAFA;
+  --wit:#FFFFFF;
+
+  /* THEMA LIGHT */
+  --bg:#EAF3FF;
+  --tekst:var(--n-900);
+  --tekst-zacht:var(--n-500);
+  --nav-tekst:#002A5C;
+
+  /* SURFACES */
+  --surface:#FFFFFF;
+  --surface-2:#F4F7FB;
+  --border:rgba(19,23,29,.10);
+
+  /* TYPO */
+  --font:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --line:1.6;
+
+  /* RADIUS */
+  --r:18px;
+  --r-afb:26px;
+
+  /* SHADOW */
+  --shadow:0 10px 22px rgba(0,0,0,.08);
+
+  /* SPACING */
+  --s2:.5rem;
+  --s3:.75rem;
+  --s4:1rem;
+  --s5:1.5rem;
+  --s6:2rem;
+  --s7:3rem;
+  --s8:4rem;
+
+  /* LAYOUT */
+  --container:1720px;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000C1A;
+    --tekst:#FAFAFA;
+    --tekst-zacht:#C4D0DC;
+    --nav-tekst:#B8D9FF;
+
+    --surface:#001F44;
+    --surface-2:#002A5C;
+    --border:rgba(255,255,255,.12);
+
+    --shadow:0 10px 22px rgba(0,0,0,.40);
+  }
+}
+
+footer{
+  background-color:#00408f;
+  padding:40px;
+  margin-top:40px;
+  color:#fff;
+
+  a{
+    color:#fff;
+    text-decoration:none;
+  }
+
+  a:hover{
+    text-decoration:underline;
+  }
+
+  a:visited{
+    color:#fff;
+  }
+
+  .navContainer{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:16px;
+    align-content:space-evenly;
+    margin-top:40px;
+  }
+
+  .navContainer section ul{
+    margin:0;
+    padding:0;
+    list-style-type:none;
+  }
+
+  hr{
+    width:100%;
+    border:none;
+    border-top:1px solid #fff;
+  }
+}
+
+@media (max-width: 900px){
+  footer .navContainer{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media (max-width: 600px){
+  footer .navContainer{
+    grid-template-columns:1fr;
+  }
+}
