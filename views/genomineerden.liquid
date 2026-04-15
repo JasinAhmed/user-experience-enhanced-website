@@ -1,0 +1,104 @@
+{% render 'partials/head.liquid', title: 'Genomineerden' %}
+
+<a class="skip-link" href="#inhoud">Ga direct naar de inhoud</a>
+
+<header class="site-header">
+  <nav class="snelle-links-nav">
+    <ul class="snelle-links-lijst pagina-container">
+      <li><a href="/#faq">FAQ's</a></li>
+      <li><a href="/#over-ons">Over ons</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hoofd-navigatie-balk">
+    <nav class="hoofd-navigatie pagina-container">
+      <a href="/" class="logo-link">
+        <img src="/style/assets/Adconnect.svg" alt="Overlegplatform Associate Degrees logo" width="180" height="45">
+      </a>
+
+      <button class="hamburger" id="hamburger" type="button">
+        Menu
+      </button>
+
+      <ul class="hoofd-menu" id="hoofd-menu">
+        <li><a class="menu-link" href="/">Home</a></li>
+        <li><a class="menu-link" href="/#uitleg">Over Ad's</a></li>
+        <li><a class="menu-link" href="/#publicaties">Publicaties</a></li>
+        <li><a class="menu-link actief" href="/genomineerden">Talent Award</a></li>
+        <li><a class="menu-link" href="/#nieuws">Nieuws</a></li>
+        <li class="menu-cta">
+          <a href="/#ad-dag" class="knop-cta">Kom naar Ad-dag</a>
+        </li>
+      </ul>
+
+      <a href="/#ad-dag" class="knop-cta desktop-cta">Kom naar Ad-dag</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pagina-container" id="inhoud">
+  <section class="pagina-intro">
+    <header class="divider">
+      <h1>Genomineerde studenten</h1>
+    </header>
+
+    <p>Klik op een genomineerde student om meer te bekijken.</p>
+  </section>
+
+  <section class="genomineerden-sectie">
+    <header class="divider">
+      <h2>Genomineerden</h2>
+    </header>
+
+    {% if nominees and nominees.size > 0 %}
+      <ul class="genomineerden-grid">
+        {% for student in nominees %}
+          {% if student.title and student.title != blank %}
+            <li>
+              <div class="genomineerde-kaart">
+                <figure class="kaart-afbeelding">
+                  {% if student.profile_picture %}
+                    <img
+                      src="https://fdnd-agency.directus.app/assets/{{ student.profile_picture }}"
+                      alt="Profielfoto van {{ student.title }}"
+                      width="220"
+                      height="220">
+                  {% else %}
+                    <img
+                      src="/style/assets/fotothijs.jpg"
+                      alt="Profielfoto van {{ student.title }}"
+                      width="220"
+                      height="220">
+                  {% endif %}
+                </figure>
+
+                <section class="kaart-inhoud">
+                  <h3>{{ student.title }}</h3>
+
+                  {% if student.institution %}
+                    <p>{{ student.institution }}</p>
+                  {% endif %}
+
+                  {% if student.course %}
+                    <p>{{ student.course }}</p>
+                  {% endif %}
+
+                  <p>
+                    <a class="tekst-link" href="/genomineerden/{{ student.id }}">
+                      Lees meer over {{ student.title }}
+                    </a>
+                  </p>
+                </section>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Er zijn nog geen genomineerden.</p>
+    {% endif %}
+  </section>
+</main>
+
+{% render 'partials/foot.liquid' %}

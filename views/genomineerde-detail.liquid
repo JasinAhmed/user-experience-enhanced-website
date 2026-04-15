@@ -1,0 +1,231 @@
+{% render 'partials/head.liquid', title: nominee.title %}
+
+<a class="skip-link" href="#inhoud">Ga direct naar de inhoud</a>
+
+<header class="site-header">
+  <nav class="snelle-links-nav">
+    <ul class="snelle-links-lijst pagina-container">
+      <li><a href="/#faq">FAQ's</a></li>
+      <li><a href="/#over-ons">Over ons</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hoofd-navigatie-balk">
+    <nav class="hoofd-navigatie pagina-container">
+      <a href="/" class="logo-link">
+        <img src="/style/assets/Adconnect.svg" alt="Overlegplatform Associate Degrees logo" width="180" height="45">
+      </a>
+
+      <button class="hamburger" id="hamburger" type="button">Menu</button>
+
+      <ul class="hoofd-menu" id="hoofd-menu">
+        <li><a class="menu-link" href="/#uitleg">Over Ad's</a></li>
+        <li><a class="menu-link" href="/#publicaties">Publicaties</a></li>
+        <li><a class="menu-link actief" href="/genomineerden">Talent Award</a></li>
+        <li><a class="menu-link" href="/#nieuws">Nieuws</a></li>
+        <li class="menu-cta">
+          <a href="/#ad-dag" class="knop-cta">Kom naar Ad-dag</a>
+        </li>
+      </ul>
+
+      <a href="/#ad-dag" class="knop-cta desktop-cta">Kom naar Ad-dag</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pagina-container" id="inhoud">
+  <p class="pagina-intro">
+    <a class="tekst-link" href="/genomineerden">← Terug naar overzicht</a>
+  </p>
+
+  <article class="genomineerde-detail-kaart">
+    <figure class="detail-afbeelding">
+      {% if nominee.profile_picture %}
+        <img
+          src="https://fdnd-agency.directus.app/assets/{{ nominee.profile_picture }}"
+          alt="Profielfoto van {{ nominee.title }}"
+          width="500"
+          height="500">
+      {% else %}
+        <img
+          src="/style/assets/fotothijs.jpg"
+          alt="Profielfoto van {{ nominee.title }}"
+          width="500"
+          height="500">
+      {% endif %}
+    </figure>
+
+    <section class="detail-inhoud">
+      <h1>{{ nominee.title }}</h1>
+
+      {% if nominee.institution %}
+        <p><strong>Onderwijsinstelling:</strong> {{ nominee.institution }}</p>
+      {% endif %}
+
+      {% if nominee.course %}
+        <p><strong>Opleiding:</strong> {{ nominee.course }}</p>
+      {% endif %}
+
+      {% if nominee.education_variant %}
+        <p><strong>Variant:</strong> {{ nominee.education_variant }}</p>
+      {% endif %}
+
+      {% if nominee.previous_course %}
+        <p><strong>Vorige opleiding:</strong> {{ nominee.previous_course }}</p>
+      {% endif %}
+
+      {% if nominee.header %}
+        <p><strong>Categorie:</strong> {{ nominee.header }}</p>
+      {% endif %}
+
+      {% if nominee.date %}
+        <p><strong>Datum:</strong> {{ nominee.date | date: "%-d %B %Y" }}</p>
+      {% endif %}
+
+      {% if nominee.excerpt %}
+        <section>
+          <h2>Korte introductie</h2>
+          {{ nominee.excerpt }}
+        </section>
+      {% endif %}
+
+      {% if nominee.body %}
+        <section>
+          <h2>Meer over deze genomineerde</h2>
+          {{ nominee.body }}
+        </section>
+      {% endif %}
+
+      <section class="extra-aanbevelingen">
+        <h2>Aanbevelingen</h2>
+
+        <section>
+          <h3>Nominatie Hogeschool</h3>
+          <p>
+            Thijs is een student op wie wij enorm trots zijn. Als SLB'er heb ik Thijs leren kennen
+            als een betrokken, bescheiden en zeer leergierige Ad-professional, die zijn vakmanschap
+            vooral laat zien door zijn houding en handelen, en niet door zichzelf op de voorgrond
+            te plaatsen. Voor een project in leerjaar 1 nam hij hierbij het voortouw om op zijn stage
+            een preventieve activiteit met Alpaca's te regelen voor cliënten, wat een groot succes was!
+          </p>
+          <p>
+            In samenwerking met medestudenten, docenten en het werkveld is Thijs respectvol,
+            betrouwbaar en proactief. Hij neemt verantwoordelijkheid, werkt zelfstandig en denkt
+            actief mee over oplossingen voor praktijkvraagstukken.
+          </p>
+          <p>
+            Zijn integriteit is hierin opvallend: Thijs oordeelt niet en blijft altijd zorgvuldig
+            in hoe hij over anderen spreekt.
+          </p>
+          <p>
+            Deze houding is van grote waarde in het werken met de complexe doelgroep, die vaak te maken
+            krijgt met vooroordelen en stigma. Thijs benadert cliënten consequent oordeelloos en mensgericht.
+          </p>
+          <p>
+            Wat Thijs daarnaast onderscheidt, is zijn sterk lerend vermogen. Hij reflecteert eerlijk
+            op zijn eigen handelen en neemt regie over zijn ontwikkeling en vervolgstappen als Ad-professional.
+          </p>
+          <p>
+            Dat maakt hem in onze ogen een zeer terechte kandidaat voor de Ad Talent Award 2026, want
+            als er al een prachtige prijs als deze gegeven mag worden aan een student binnen het werkveld
+            van Zorg en Veiligheid, dan verdient Thijs Kiens het wel.
+          </p>
+          <p>
+            <strong>Fransien Hummel</strong>, SLB'er bij opleiding Ad Zorg en Veiligheid, ook namens het gehele docententeam en de Academie.
+          </p>
+        </section>
+
+        <section>
+          <h3>Aanbeveling externe stakeholder</h3>
+          <p>
+            "Thijs heeft alles op orde, beantwoordt vragen met een lach en is hulpvaardig. Vanaf de start
+            van zijn stage bij sociaal beheer neemt hij zelf de verantwoordelijkheid voor zijn leerproces.
+            Op dag 1 kreeg hij zijn spullen, de dag erna liep hij met iemand mee en op dag 3 heeft hij,
+            op eigen initiatief, zelfstandig bewoners bezocht."
+          </p>
+          <p>
+            "Thijs legt makkelijk contact, hij is een verbinder. Aan het begin van de stage had hij een overleg
+            met wijkagenten, stelde zich voor als 'de nieuwe directeur' maar uiteraard met een lach. Het ijs was
+            direct gebroken. Een bewoner die 40 jaar bij Cazas woonde krijgt normaliter bezoek vanuit coöperatie,
+            dat lukte echter niet overdag en dus maakte Thijs in de avond tijd vrij om langs te gaan. Of die keer
+            dat hij kacheltjes verzamelde toen er een gaslek op de Eikenlaan was. Kortom; Thijs is van alle markten thuis."
+          </p>
+          <p><strong>Lisa van Zuilen</strong>, sociaal beheerder bij Cazas Wonen.</p>
+        </section>
+      </section>
+    </section>
+  </article>
+
+  <section class="reacties-layout">
+    <section class="reactie-formulier-sectie">
+      <h2>Laat een reactie achter</h2>
+
+      <form action="/genomineerden/{{ nominee.id }}" method="POST" class="reactie-formulier" novalidate>
+        <label for="naam">Naam</label>
+        <input type="text" id="naam" name="naam" required>
+        <small class="foutmelding" id="naam-fout">Vul je naam in.</small>
+
+        <label for="bericht">Bericht</label>
+        <textarea id="bericht" name="bericht" rows="6" required></textarea>
+        <small class="foutmelding" id="bericht-fout">Vul eerst een bericht in.</small>
+
+        <button type="submit" class="knop-cta">Verstuur</button>
+      </form>
+    </section>
+
+    <section class="reacties-sectie">
+      <h2>
+        {% assign aantal = reacties | size %}
+        {% if aantal == 0 %}
+          Wees de eerste die reageert
+        {% elsif aantal == 1 %}
+          1 reactie
+        {% else %}
+          {{ aantal }} reacties
+        {% endif %}
+      </h2>
+
+      {% if reacties and reacties.length > 0 %}
+        {% assign gesorteerde_reacties = reacties | sort: "date_created" | reverse %}
+
+        <ul class="reacties-lijst">
+          {% for reactie in gesorteerde_reacties %}
+            <li class="reactie-kaart" id="reactie-{{ reactie.id }}">
+              <article class="reactie-inhoud">
+                <header class="reactie-header">
+                  <p class="reactie-naam">
+                    {% if reactie.name == blank or reactie.name == "test" %}
+                      Onbekend
+                    {% else %}
+                      {{ reactie.name }}
+                    {% endif %}
+                  </p>
+
+                  {% if reactie.date_created %}
+                    <p class="reactie-datum">
+                      <time datetime="{{ reactie.date_created }}">
+                        {{ reactie.date_created | date: "%-d %B %Y" }}
+                      </time>
+                    </p>
+                  {% endif %}
+                </header>
+
+                <p class="reactie-bericht">{{ reactie.comment }}</p>
+
+                <form action="/reacties/{{ reactie.id }}/verwijderen" method="POST" class="reactie-verwijder-formulier">
+                  <input type="hidden" name="nomineeId" value="{{ nominee.id }}">
+                  <button type="submit" class="verwijder-knop">Verwijderen</button>
+                </form>
+              </article>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Er zijn nog geen reacties geplaatst.</p>
+      {% endif %}
+    </section>
+  </section>
+</main>
+
+{% render 'partials/foot.liquid' %}

@@ -1,0 +1,136 @@
+{% render 'partials/head.liquid', title: 'Home' %}
+
+<a class="skip-link" href="#inhoud">Ga direct naar de inhoud</a>
+
+<header class="site-header">
+  <nav class="snelle-links-nav">
+    <ul class="snelle-links-lijst pagina-container">
+      <li><a href="#faq">FAQ's</a></li>
+      <li><a href="#over-ons">Over ons</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hoofd-navigatie-balk">
+    <nav class="hoofd-navigatie pagina-container">
+      <a href="/" class="logo-link">
+        <img src="/style/assets/Adconnect.svg" alt="Overlegplatform Associate Degrees logo" width="180" height="45">
+      </a>
+
+      <button class="hamburger" id="hamburger" type="button">
+        Menu
+      </button>
+
+      <ul class="hoofd-menu" id="hoofd-menu">
+        <li><a class="menu-link" href="#uitleg">Over Ad's</a></li>
+        <li><a class="menu-link" href="#publicaties">Publicaties</a></li>
+        <li><a class="menu-link" href="/lado">Lado's</a></li>
+        <li><a class="menu-link" href="/genomineerden">Talent Award</a></li>
+        <li><a class="menu-link" href="#nieuws">Nieuws</a></li>
+        <li class="menu-cta">
+          <a href="#ad-dag" class="knop-cta">Kom naar Ad-dag</a>
+        </li>
+      </ul>
+
+      <a href="#ad-dag" class="knop-cta desktop-cta">Kom naar Ad-dag</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pagina-container" id="inhoud">
+  <section class="hero-sectie">
+    <div class="hero-tekst">
+      <h1>Het landelijke platform voor Associate degrees</h1>
+      <p>
+        Ad-netwerk samen om kennis te delen, samen te werken en de kwaliteit
+        en zichtbaarheid van Associate degrees te versterken.
+      </p>
+
+      <p class="hero-acties">
+        <a class="knop-outline" href="#uitleg">Meer over Ad's</a>
+        <a class="knop-blauw" href="#ad-dag">Kom naar de Ad-dag</a>
+      </p>
+    </div>
+
+    <figure class="hero-afbeelding">
+      <img
+        src="/style/assets/bannerpic.jpg"
+        alt="Studenten werken samen tijdens een Associate Degree opleiding"
+        width="1100"
+        height="700">
+    </figure>
+  </section>
+
+  <section class="nieuws-sectie" id="nieuws">
+    <header class="sectie-kop">
+      <span class="divider-lijn"></span>
+      <h2>Het laatste nieuws</h2>
+      <span class="divider-lijn"></span>
+    </header>
+
+    {% assign geldige_nieuwsitems = 0 %}
+
+    {% if news and news.size > 0 %}
+      <ul class="nieuws-grid">
+        {% for item in news %}
+          {% if item.title and item.title != blank %}
+            {% assign geldige_nieuwsitems = geldige_nieuwsitems | plus: 1 %}
+            <li>
+              <article class="nieuws-kaart">
+                <figure class="kaart-afbeelding">
+                  {% if item.image %}
+                    <img
+                      src="https://fdnd-agency.directus.app/assets/{{ item.image }}"
+                      alt="Afbeelding bij nieuwsbericht: {{ item.title }}"
+                      width="360"
+                      height="240">
+                  {% else %}
+                    <img
+                      src="/style/assets/ad-dag.jpg"
+                      alt="Landelijke Ad-dag evenement met deelnemers"
+                      width="360"
+                      height="240">
+                  {% endif %}
+                </figure>
+
+                <div class="nieuws-inhoud">
+                  {% if item.date %}
+                    <p class="nieuws-meta">{{ item.date | date: "%-d %B %Y" }}</p>
+                  {% endif %}
+
+                  <h3>{{ item.title }}</h3>
+
+                  {% if item.description and item.description != blank %}
+                    <p>{{ item.description }}</p>
+                  {% else %}
+                    <p>Lees meer over dit nieuwsbericht.</p>
+                  {% endif %}
+
+                  <p>
+                    {% if item.slug and item.slug != blank %}
+                      <a class="tekst-link" href="/nieuws/{{ item.slug }}">
+                        Lees meer over {{ item.title }}
+                      </a>
+                    {% else %}
+                      <a class="tekst-link" href="/nieuws">
+                        Lees meer over {{ item.title }}
+                      </a>
+                    {% endif %}
+                  </p>
+                </div>
+              </article>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      {% if geldige_nieuwsitems == 0 %}
+        <p>Er zijn nog geen nieuwsberichten.</p>
+      {% endif %}
+    {% else %}
+      <p>Er zijn nog geen nieuwsberichten.</p>
+    {% endif %}
+  </section>
+</main>
+
+{% render 'partials/foot.liquid' %}
