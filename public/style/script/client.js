@@ -19,12 +19,18 @@ if (hamburger && menu) {
 /* Ik pak hier het reactieformulier op */
 const reactieFormulier = document.querySelector('.reactie-formulier');
 
-/* Ik voer de validatie alleen uit als het formulier bestaat */
+/* Ik voer alles alleen uit als het formulier bestaat */
 if (reactieFormulier) {
   const naamInput = document.getElementById('naam');
   const berichtInput = document.getElementById('bericht');
   const naamFout = document.getElementById('naam-fout');
   const berichtFout = document.getElementById('bericht-fout');
+
+  /* Ik pak de knop in mijn formulier */
+  const reactieKnop = reactieFormulier.querySelector('.reactie-knop');
+
+  /* Ik pak de lijst waar alle reacties in staan */
+  const reactiesLijst = document.querySelector('.reacties-lijst');
 
   /* Ik maak een functie die een fout laat zien */
   function toonFout(veld, foutmelding) {
@@ -60,17 +66,57 @@ if (reactieFormulier) {
     return true;
   }
 
-  /* Ik voorkom submit als één van de velden leeg is */
-  reactieFormulier.addEventListener('submit', function (event) {
-    const naamIsGoed = controleerNaam();
-    const berichtIsGoed = controleerBericht();
-
-    if (!naamIsGoed || !berichtIsGoed) {
-      event.preventDefault();
-    }
-  });
-
   /* Ik haal de fout direct weg zodra er iets wordt ingevuld */
   naamInput.addEventListener('input', controleerNaam);
   berichtInput.addEventListener('input', controleerBericht);
+
+  /* Als ik mijn formulier verstuur */
+  reactieFormulier.addEventListener('submit', async function (event) {
+    /* Ik voorkom dat mijn pagina opnieuw laadt */
+    event.preventDefault();
+
+    /* Ik controleer eerst of alles goed is ingevuld */
+    const naamIsGoed = controleerNaam();
+    const berichtIsGoed = controleerBericht();
+
+    /* Ik stop als één van de velden niet goed is ingevuld */
+    if (!naamIsGoed || !berichtIsGoed) {
+      return;
+    }
+
+    /* Ik laat op de knop zien dat hij bezig is */
+    reactieKnop.classList.add('loading');
+    reactieKnop.disabled = true;
+
+    /* Ik verzamel alles wat ik in mijn formulier heb ingevuld */
+    let formData = new FormData(reactieFormulier);
+
+    /* Ik stuur mijn formulier-data naar de server */
+    const response = await fetch(reactieFormulier.action, {
+      method: reactieFormulier.method,
+      body: new URLSearchParams(formData)
+    });
+
+    /* Ik haal de nieuwe HTML op die ik van de server terugkrijg */
+    const responseData = await response.text();
+
+    /* Ik maak van die HTML een soort tijdelijke pagina */
+    const parser = new DOMParser();
+    const responseDOM = parser.parseFromString(responseData, 'text/html');
+
+    /* Ik zoek in die tijdelijke pagina de nieuwe reacties-lijst op */
+    const nieuweReactiesLijst = responseDOM.querySelector('.reacties-lijst');
+
+    /* Als de nieuwe lijst bestaat, vervang ik mijn oude lijst */
+    if (nieuweReactiesLijst && reactiesLijst) {
+      reactiesLijst.innerHTML = nieuweReactiesLijst.innerHTML;
+    }
+
+    /* Ik haal de loading state weer van mijn knop af */
+    reactieKnop.classList.remove('loading');
+    reactieKnop.disabled = false;
+
+    /* Ik maak mijn formulier leeg nadat mijn reactie is geplaatst */
+    reactieFormulier.reset();
+  });
 }
