@@ -1796,3 +1796,46 @@ summary:focus-visible{
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+/* success melding */
+.success-melding {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background-color: #e6f8ec;
+  color: #146c2e;
+  font-weight: 600;
+}
+
+.success-melding.zichtbaar {
+  display: block;
+}
+
+/* 🎉 confetti */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-500);
+  z-index: 9999;
+  animation: confettiValt 3s linear forwards;
+}
+
+.confetti:nth-child(even) {
+  background-color: var(--merk-400);
+}
+
+@keyframes confettiValt {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+/* Ik highlight de nieuwe reactie */
+.reactie-kaart.highlight {
+  border-left: 4px solid var(--accent-500);
+  padding-left: 10px;
+  background-color: rgba(231, 82, 52, 0.08);
+  transition: all 0.3s ease;
+}
