@@ -32,6 +32,9 @@ if (reactieFormulier) {
   /* Ik pak de lijst waar alle reacties in staan */
   const reactiesLijst = document.querySelector('.reacties-lijst');
 
+  /* Ik pak de success melding */
+  const successMelding = document.getElementById('success-melding');
+
   /* Ik maak een functie die een fout laat zien */
   function toonFout(veld, foutmelding) {
     veld.classList.add('heeft-fout');
@@ -64,6 +67,30 @@ if (reactieFormulier) {
 
     verwijderFout(berichtInput, berichtFout);
     return true;
+  }
+
+  /* Ik maak mijn eigen simpele confetti functie */
+  function startConfetti() {
+    for (let i = 0; i < 30; i++) {
+      const confettiStukje = document.createElement('span');
+
+      /* Ik geef elk stukje de confetti class */
+      confettiStukje.classList.add('confetti');
+
+      /* Ik zet elk stukje op een willekeurige plek bovenaan het scherm */
+      confettiStukje.style.left = Math.random() * 100 + 'vw';
+
+      /* Ik geef elk stukje een kleine random vertraging */
+      confettiStukje.style.animationDelay = Math.random() * 0.5 + 's';
+
+      /* Ik voeg de confetti toe aan de pagina */
+      document.body.appendChild(confettiStukje);
+
+      /* Ik verwijder de confetti weer na 3 seconden */
+      setTimeout(() => {
+        confettiStukje.remove();
+      }, 3000);
+    }
   }
 
   /* Ik haal de fout direct weg zodra er iets wordt ingevuld */
@@ -111,6 +138,40 @@ if (reactieFormulier) {
     if (nieuweReactiesLijst && reactiesLijst) {
       reactiesLijst.innerHTML = nieuweReactiesLijst.innerHTML;
     }
+
+    /* Ik pak de nieuwste reactie uit de bijgewerkte lijst */
+    const nieuweReactie = reactiesLijst.querySelector('.reactie-kaart');
+
+    /* Als de nieuwste reactie bestaat, ga ik daar naartoe */
+    if (nieuweReactie) {
+      /* Ik zet de # van de nieuwe reactie in de URL */
+      window.location.hash = nieuweReactie.id;
+
+      /* Ik scroll rustig naar de nieuwe reactie */
+      nieuweReactie.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+      /* Ik geef de nieuwe reactie tijdelijk een highlight */
+      nieuweReactie.classList.add('highlight');
+
+      /* Ik haal de highlight na 3 seconden weer weg */
+      setTimeout(() => {
+        nieuweReactie.classList.remove('highlight');
+      }, 3000);
+    }
+
+    /* Ik toon de success melding */
+    successMelding.classList.add('zichtbaar');
+
+    /* Ik haal de melding na 3 seconden weer weg */
+    setTimeout(() => {
+      successMelding.classList.remove('zichtbaar');
+    }, 3000);
+
+    /* Ik start de confetti */
+    startConfetti();
 
     /* Ik haal de loading state weer van mijn knop af */
     reactieKnop.classList.remove('loading');
