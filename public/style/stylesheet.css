@@ -120,3 +120,46 @@ footer{
     grid-template-columns:1fr;
   }
 }
+/* Loading state reactieknop */
+.reactie-knop {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  min-height: 52px;
+}
+
+.knop-logo {
+  display: none;
+}
+
+.reactie-knop.loading {
+  background-color: var(--wit);
+  color: var(--merk-700);
+  border: 2px solid var(--merk-500);
+  cursor: not-allowed;
+}
+
+.reactie-knop.loading .knop-tekst {
+  visibility: hidden;
+}
+
+.reactie-knop.loading .knop-logo {
+  display: block;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  animation: draaiLogo 1s linear infinite;
+}
+
+@keyframes draaiLogo {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
