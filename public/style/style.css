@@ -1874,3 +1874,123 @@ summary:focus-visible{
     transform: scale(1);
   }
 }
+@media (prefers-color-scheme: dark) {
+  .snelle-links-nav {
+    background: #002A5C;
+  }
+
+  .snelle-links-lijst a {
+    color: #ffffff;
+  }
+
+  .hoofd-navigatie-balk {
+    background: #0B1220;
+  }
+
+  .hoofd-menu.open {
+    background: #0B1220;
+  }
+
+  .menu-link {
+    color: #EAF3FF;
+  }
+
+  .menu-link:hover,
+  .menu-link.actief {
+    color: #ffffff;
+  }
+
+  .menu-link.actief::after {
+    background: #ffffff;
+  }
+
+  .hamburger {
+    background: #001F44;
+    color: #ffffff;
+    border-color: rgba(255,255,255,.2);
+  }
+
+  .hero-sectie {
+    background: #002A5C;
+  }
+
+  .knop-outline {
+    background: transparent;
+    color: #ffffff;
+    border-color: #E75234;
+  }
+
+  .knop-outline:hover {
+    background: rgba(231,82,52,.12);
+  }
+
+  .knop-blauw,
+  .knop-cta {
+    background: #0058C2;
+    color: #ffffff;
+    border-color: #C2DDFF;
+  }
+
+  .knop-blauw:hover,
+  .knop-cta:hover {
+    background: #006FF5;
+  }
+
+  .nieuws-kaart,
+  .genomineerde-kaart,
+  .genomineerde-detail-kaart,
+  .lado-kaart,
+  .lado-accordion,
+  .talent-award-pagina .genomineerde-kaart {
+    background: #001F44;
+    color: #FAFAFA;
+    border-color: rgba(255,255,255,.14);
+  }
+
+  .nieuws-inhoud p,
+  .kaart-inhoud p,
+  .detail-inhoud p,
+  .lado-detail-inhoud p,
+  .lado-uitleg,
+  .lado-accordion p,
+  .nieuws-meta {
+    color: #C4D0DC;
+  }
+
+  .tekst-link,
+  .footer-link {
+    color: #B8D9FF;
+  }
+
+  .divider-lijn {
+    background: rgba(255,255,255,.25);
+  }
+
+  .reactie-formulier input,
+  .reactie-formulier textarea {
+    background: #000C1A;
+    color: #FAFAFA;
+    border-color: rgba(255,255,255,.18);
+  }
+
+  footer,
+  .site-footer {
+    background: #0B1220;
+    color: #ffffff;
+  }
+}
+/* standaard: alleen light */
+.logo-dark {
+  display: none;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  .logo-light {
+    display: none;
+  }
+
+  .logo-dark {
+    display: block;
+  }
+}
