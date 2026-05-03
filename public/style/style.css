@@ -2150,3 +2150,29 @@ summary:focus-visible{
     width:100%;
   }
 }
+/* Animatie voor LAdO accordions */
+@supports (interpolate-size: allow-keywords) and (selector(::details-content)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .lado-kaart,
+    .lado-accordion {
+      interpolate-size: allow-keywords;
+    }
+
+    .lado-kaart::details-content,
+    .lado-accordion::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition:
+        content-visibility 0.35s allow-discrete,
+        block-size 0.35s ease,
+        opacity 0.35s ease;
+    }
+
+    .lado-kaart[open]::details-content,
+    .lado-accordion[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+}
