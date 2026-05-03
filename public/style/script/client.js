@@ -1,6 +1,7 @@
 import './hamburger-menu.js';
 import './reactie-formulier.js';
 import './view-transition.js';
+import './add-news.js';
 
 
 
