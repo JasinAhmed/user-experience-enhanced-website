@@ -1,21 +1,19 @@
 console.log('Hier komt je server voor Sprint 10.')
 
 // console.log('Gebruik uit Sprint 9 alleen de code die je mee wilt nemen.')
-// Importeer het npm package Express (uit de door npm aangemaakte node_modules map)
-// Deze package is geïnstalleerd via `npm install`, en staat als 'dependency' in package.json
+// Importeer het npm package Express
 import express from 'express'
 
-// Importeer de Liquid package (ook als dependency via npm geïnstalleerd)
-import { Liquid } from 'liquidjs';
+// Importeer de Liquid package
+import { Liquid } from 'liquidjs'
 
-// Maak een nieuwe Express applicatie aan, waarin we de server configureren
+// Maak een nieuwe Express applicatie aan
 const app = express()
 
 // Maak werken met data uit formulieren iets prettiger
 app.use(express.urlencoded({ extended: true }))
 
-// Gebruik de map 'public' voor statische bestanden (resources zoals CSS, JavaScript, afbeeldingen en fonts)
-// Bestanden in deze map kunnen dus door de browser gebruikt worden
+// Gebruik de map 'public' voor statische bestanden
 app.use(express.static('public'))
 
 // Stel Liquid in als 'view engine'
@@ -23,7 +21,6 @@ const engine = new Liquid()
 app.engine('liquid', engine.express())
 
 // Stel de map met Liquid templates in
-// Let op: de browser kan deze bestanden niet rechtstreeks laden (zoals voorheen met HTML bestanden)
 app.set('views', './views')
 
 // Zet Liquid als view engine
@@ -46,8 +43,67 @@ app.get('/', async function (request, response) {
   const news = apiResponseJSON.data
 
   // Render index.liquid en geef news mee
-  // Zie https://expressjs.com/en/5x/api.html#res.render over response.render()
   response.render('index.liquid', { news: news })
+})
+
+
+// ROUTE: FORMULIER OM EEN NIEUWSBERICHT TOE TE VOEGEN
+// Deze route toont de pagina met het formulier voor de admin
+app.get('/nieuws-toevoegen', async function (request, response) {
+  response.render('add-news.liquid', {
+    path: request.path
+  })
+})
+
+
+// ROUTE: NIEUWSBERICHT TOEVOEGEN
+// Deze route ontvangt de data uit het formulier
+// Daarna stuurt deze route de data door naar Directus
+app.post('/nieuws-toevoegen', async function (request, response) {
+
+  // In request.body zitten alle velden uit het formulier
+  // Elk veld moet in HTML een name="" attribuut hebben
+  const title = request.body.title
+  const description = request.body.description
+  const body = request.body.body
+  const author = request.body.author
+  const date = request.body.date
+  const status = request.body.status
+
+  // Met fetch sturen we een POST request naar Directus
+  // Hiermee maken we een nieuw item aan in de collectie adconnect_news
+  const fetchResponse = await fetch('https://fdnd-agency.directus.app/items/adconnect_news', {
+    method: 'POST',
+
+    // Hier zetten we de formulierdata om naar JSON
+    body: JSON.stringify({
+      title: title,
+      description: description,
+      body: body,
+      author: author,
+      date: date,
+      status: status
+    }),
+
+    // Hiermee vertellen we Directus dat we JSON sturen
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+
+  // Check of het opslaan in Directus gelukt is
+  // Als het niet lukt, tonen we een foutmelding
+  if (!fetchResponse.ok) {
+    const error = await fetchResponse.text()
+    console.log(error)
+
+    response.status(500).send('Het toevoegen van het nieuwsbericht is niet gelukt')
+    return
+  }
+
+  // Als het opslaan wel lukt, sturen we alleen een succesvolle response terug
+  // De client-side JavaScript toont daarna de succesmelding
+  response.status(200).send('Nieuwsbericht succesvol toegevoegd')
 })
 
 
@@ -69,7 +125,7 @@ app.get('/genomineerden', async function (request, response) {
   // Zet de opgehaalde data om naar JSON
   const apiResponseJSON = await apiResponse.json()
 
-  // Pak alleen de array met genomineerden uit de JSON
+  // Pak alleen de array met genomineerden
   const nominees = apiResponseJSON.data
 
   // Render de pagina en geef nominees mee
@@ -109,28 +165,24 @@ app.get('/genomineerden/:id', async function (request, response) {
     return item.nomination == id
   })
 
-  // Render de detailpagina en geef de genomineerde mee
-  response.render('genomineerde-detail.liquid', { nominee: nominee, reacties: reacties })
+  // Render de detailpagina en geef de genomineerde en reacties mee
+  response.render('genomineerde-detail.liquid', {
+    nominee: nominee,
+    reacties: reacties
+  })
 })
 
 
-// Maak een POST route voor de detailpagina van een genomineerde
-// Zie https://expressjs.com/en/5x/api.html#app.post.method over app.post()
+// ROUTE: REACTIE PLAATSEN BIJ EEN GENOMINEERDE
+// Deze route ontvangt het reactieformulier op de detailpagina
 app.post('/genomineerden/:id', async function (request, response) {
 
-  // In request.body zitten alle formuliervelden die een `name` attribuut hebben in je HTML
-
-  // Via een fetch() naar Directus vullen we nieuwe gegevens in
-
-  // Zie https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch over fetch()
-  // Zie https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify over JSON.stringify()
-  // Zie https://docs.directus.io/reference/items.html#create-an-item over het toevoegen van gegevens in Directus
-  // Zie https://docs.directus.io/reference/items.html#update-an-item over het veranderen van gegevens in Directus
-
+  // In request.body zitten alle formuliervelden
   const naam = request.body.naam
   const bericht = request.body.bericht
   const nominee_id = request.params.id
 
+  // Met fetch sturen we de reactie naar Directus
   const fetchResponse = await fetch('https://fdnd-agency.directus.app/items/adconnect_nominations_comments', {
     method: 'POST',
     body: JSON.stringify({
@@ -143,15 +195,10 @@ app.post('/genomineerden/:id', async function (request, response) {
     }
   })
 
-  // Als de POST niet gelukt is, kun je de response loggen. Sowieso een goede debugging strategie.
-  // console.log(fetchResponse)
-
-  // Eventueel kun je de JSON van die response nog debuggen
+  // Zet de response om naar JSON
   const fetchResponseJSON = await fetchResponse.json()
-  // console.log(fetchResponseJSON)
 
-  // Redirect de gebruiker daarna naar een logische volgende stap
-  // Zie https://expressjs.com/en/5x/api.html#res.redirect over response.redirect()
+  // Redirect terug naar de detailpagina en spring naar de nieuwe reactie
   response.redirect(303, `/genomineerden/${nominee_id}#reactie-${fetchResponseJSON.data.id}`)
 })
 
@@ -164,17 +211,14 @@ app.post('/reacties/:reactieId/verwijderen', async function (request, response) 
   const reactieId = request.params.reactieId
 
   // Ik haal hier het id van de genomineerde uit het formulier
-  // Dit heb ik nodig zodat ik daarna terug kan sturen naar de juiste pagina
   const nomineeId = request.body.nomineeId
 
   // Met deze fetch stuur ik een DELETE request naar Directus
-  // Zo probeer ik precies die ene reactie te verwijderen
   const deleteResponse = await fetch(`https://fdnd-agency.directus.app/items/adconnect_nominations_comments/${reactieId}`, {
     method: 'DELETE'
   })
 
   // Ik check even of het verwijderen gelukt is
-  // Als het niet lukt, laat ik een simpele foutmelding zien
   if (!deleteResponse.ok) {
     response.status(500).send('Het verwijderen van de reactie is niet gelukt')
     return
@@ -186,12 +230,12 @@ app.post('/reacties/:reactieId/verwijderen', async function (request, response) 
 
 
 // Stel het poortnummer in waar Express op moet gaan luisteren
-// Lokaal is dit poort 8000; als deze applicatie ergens gehost wordt, waarschijnlijk poort 80
 app.set('port', process.env.PORT || 8000)
 
-// Start Express op, gebruik daarbij het zojuist ingestelde poortnummer op
+
+// Start Express op
 app.listen(app.get('port'), function () {
-  // Toon een bericht in de console
   console.log(`Daarna kun je via http://localhost:${app.get('port')}/ jouw interactieve website bekijken.\n\nThe Web is for Everyone. Maak mooie dingen 🙂`)
 })
+
 // console.log('Zet \'m op!')
