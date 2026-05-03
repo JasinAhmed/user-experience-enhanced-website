@@ -2,38 +2,7 @@
 
 <a class="skip-link" href="#inhoud">Ga direct naar de inhoud</a>
 
-<header class="site-header">
-  <nav class="snelle-links-nav">
-    <ul class="snelle-links-lijst pagina-container">
-      <li><a href="/#faq">FAQ's</a></li>
-      <li><a href="/#over-ons">Over ons</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <div class="hoofd-navigatie-balk">
-    <nav class="hoofd-navigatie pagina-container">
-      <a href="/" class="logo-link">
-       <img src="/style/assets/Adconnect.svg" class="logo-light" alt="Overlegplatform Associate Degrees logo" width="180" height="45">
-         <img src="/style/assets/logoad.png" class="logo-dark" alt="Overlegplatform Associate Degrees logo" width="180" height="45">
-      </a>
-
-      <button class="hamburger" id="hamburger" type="button">Menu</button>
-
-      <ul class="hoofd-menu" id="hoofd-menu">
-        <li><a class="menu-link" href="/#uitleg">Over Ad's</a></li>
-        <li><a class="menu-link" href="/#publicaties">Publicaties</a></li>
-        <li><a class="menu-link actief" href="/genomineerden">Talent Award</a></li>
-        <li><a class="menu-link" href="/#nieuws">Nieuws</a></li>
-        <li class="menu-cta">
-          <a href="/#ad-dag" class="knop-cta">Kom naar Ad-dag</a>
-        </li>
-      </ul>
-
-      <a href="/#ad-dag" class="knop-cta desktop-cta">Kom naar Ad-dag</a>
-    </nav>
-  </div>
-</header>
+{% render 'partials/nav.liquid' %}
 
 <main class="pagina-container" id="inhoud">
   <p class="pagina-intro">
@@ -104,55 +73,37 @@
         <section>
           <h3>Nominatie Hogeschool</h3>
           <p>
-            Thijs is een student op wie wij enorm trots zijn. Als SLB'er heb ik Thijs leren kennen
-            als een betrokken, bescheiden en zeer leergierige Ad-professional, die zijn vakmanschap
-            vooral laat zien door zijn houding en handelen, en niet door zichzelf op de voorgrond
-            te plaatsen. Voor een project in leerjaar 1 nam hij hierbij het voortouw om op zijn stage
-            een preventieve activiteit met Alpaca's te regelen voor cliënten, wat een groot succes was!
+            Thijs is een student op wie wij enorm trots zijn...
           </p>
           <p>
-            In samenwerking met medestudenten, docenten en het werkveld is Thijs respectvol,
-            betrouwbaar en proactief. Hij neemt verantwoordelijkheid, werkt zelfstandig en denkt
-            actief mee over oplossingen voor praktijkvraagstukken.
+            In samenwerking met medestudenten...
           </p>
           <p>
-            Zijn integriteit is hierin opvallend: Thijs oordeelt niet en blijft altijd zorgvuldig
-            in hoe hij over anderen spreekt.
+            Zijn integriteit is hierin opvallend...
           </p>
           <p>
-            Deze houding is van grote waarde in het werken met de complexe doelgroep, die vaak te maken
-            krijgt met vooroordelen en stigma. Thijs benadert cliënten consequent oordeelloos en mensgericht.
+            Deze houding is van grote waarde...
           </p>
           <p>
-            Wat Thijs daarnaast onderscheidt, is zijn sterk lerend vermogen. Hij reflecteert eerlijk
-            op zijn eigen handelen en neemt regie over zijn ontwikkeling en vervolgstappen als Ad-professional.
+            Wat Thijs daarnaast onderscheidt...
           </p>
           <p>
-            Dat maakt hem in onze ogen een zeer terechte kandidaat voor de Ad Talent Award 2026, want
-            als er al een prachtige prijs als deze gegeven mag worden aan een student binnen het werkveld
-            van Zorg en Veiligheid, dan verdient Thijs Kiens het wel.
+            Dat maakt hem in onze ogen...
           </p>
           <p>
-            <strong>Fransien Hummel</strong>, SLB'er bij opleiding Ad Zorg en Veiligheid, ook namens het gehele docententeam en de Academie.
+            <strong>Fransien Hummel</strong>
           </p>
         </section>
 
         <section>
           <h3>Aanbeveling externe stakeholder</h3>
           <p>
-            "Thijs heeft alles op orde, beantwoordt vragen met een lach en is hulpvaardig. Vanaf de start
-            van zijn stage bij sociaal beheer neemt hij zelf de verantwoordelijkheid voor zijn leerproces.
-            Op dag 1 kreeg hij zijn spullen, de dag erna liep hij met iemand mee en op dag 3 heeft hij,
-            op eigen initiatief, zelfstandig bewoners bezocht."
+            "Thijs heeft alles op orde..."
           </p>
           <p>
-            "Thijs legt makkelijk contact, hij is een verbinder. Aan het begin van de stage had hij een overleg
-            met wijkagenten, stelde zich voor als 'de nieuwe directeur' maar uiteraard met een lach. Het ijs was
-            direct gebroken. Een bewoner die 40 jaar bij Cazas woonde krijgt normaliter bezoek vanuit coöperatie,
-            dat lukte echter niet overdag en dus maakte Thijs in de avond tijd vrij om langs te gaan. Of die keer
-            dat hij kacheltjes verzamelde toen er een gaslek op de Eikenlaan was. Kortom; Thijs is van alle markten thuis."
+            "Thijs legt makkelijk contact..."
           </p>
-          <p><strong>Lisa van Zuilen</strong>, sociaal beheerder bij Cazas Wonen.</p>
+          <p><strong>Lisa van Zuilen</strong></p>
         </section>
       </section>
     </section>
@@ -173,15 +124,11 @@
 
         <button type="submit" class="knop-cta reactie-knop">
           <span class="knop-tekst">Verstuur</span>
-          <img
-            src="/style/assets/sublogo.png"
-            alt=""
-            class="knop-logo"
-            width="20"
-            height="20">
+          <img src="/style/assets/sublogo.png" alt="" class="knop-logo" width="20" height="20">
         </button>
+
         <p class="success-melding" id="success-melding">
-         Reactie succesvol geplaatst!
+          Reactie succesvol geplaatst!
         </p>
       </form>
     </section>
