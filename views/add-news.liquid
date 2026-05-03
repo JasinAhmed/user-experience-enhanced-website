@@ -1,0 +1,55 @@
+{% render 'partials/head.liquid', title: 'Nieuws toevoegen', path: path %}
+
+<a class="skip-link" href="#inhoud">Ga direct naar de inhoud</a>
+
+{% render 'partials/nav.liquid' %}
+
+<main class="secondary-background" id="inhoud">
+  <section>
+    <h1 class="secondary-header">Voeg nieuws toe</h1>
+
+    <!-- Alleen error blijft -->
+    <p class="error-melding" hidden>Het toevoegen is niet gelukt ❌</p>
+
+    <form class="nieuws-formulier" method="POST" action="/nieuws-toevoegen">
+
+      <label class="title">
+        Titel
+        <input name="title" id="title" type="text" required>
+      </label>
+
+      <label class="description">
+        Beschrijving
+        <textarea id="description" name="description" required></textarea>
+      </label>
+
+      <label class="author">
+        Auteur
+        <input id="author" name="author" type="text" required>
+      </label>
+
+      <label class="date">
+        Datum
+        <input id="date" name="date" type="date" required>
+      </label>
+
+      <label class="status">
+        Publicatie
+        <select id="status" name="status">
+          <option value="published">Gepubliceerd</option>
+          <option value="draft">Voorlopige versie</option>
+        </select>
+      </label>
+
+      <label class="article">
+        Artikel
+        <textarea id="body" name="body" required></textarea>
+      </label>
+
+      <button type="submit" class="nieuws-knop">Verzenden</button>
+
+    </form>
+  </section>
+</main>
+
+{% render 'partials/foot.liquid' %}
