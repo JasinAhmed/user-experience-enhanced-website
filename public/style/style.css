@@ -1130,22 +1130,19 @@ summary:focus-visible{
 .lado-kaart{
   width:100%;
   min-height:210px;
-  border:2px solid #cfcfcf;
+  border:1.5px solid #dbe3ea;
   border-radius:14px;
-  background:#f5f5f5;
+  background:#ffffff;
+  color:#111827;
   overflow:hidden;
-}
-
-@media (prefers-reduced-motion: no-preference){
-  .lado-kaart{
-    transition:transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  }
+  box-shadow:0 8px 24px rgba(15, 23, 42, 0.05);
 }
 
 .lado-kaart:hover{
-  background:#ffffff;
-  box-shadow:0 10px 24px rgba(0,0,0,0.08);
-  transform:translateY(-2px);
+  background:#eaf3ff;
+  border-color:#0058c2;
+  box-shadow:0 12px 28px rgba(0, 88, 194, 0.16);
+  transform:translateY(-3px);
 }
 
 .lado-summary{
@@ -1179,6 +1176,11 @@ summary:focus-visible{
   color:#111827;
 }
 
+.lado-kaart:hover .lado-summary h3,
+.lado-kaart:hover .lado-leesmeer{
+  color:#0058c2;
+}
+
 .plus{
   position:absolute;
   right:1.5rem;
@@ -1192,13 +1194,6 @@ summary:focus-visible{
   content:"";
   position:absolute;
   background:#ef4444;
-}
-
-@media (prefers-reduced-motion: no-preference){
-  .plus::before,
-  .plus::after{
-    transition:transform 0.2s ease, background-color 0.2s ease;
-  }
 }
 
 .plus::before{
@@ -1217,7 +1212,7 @@ summary:focus-visible{
 
 .lado-kaart:hover .plus::before,
 .lado-kaart:hover .plus::after{
-  background:#0b63ce;
+  background:#0058c2;
 }
 
 .lado-kaart[open] .plus::after{
@@ -1230,24 +1225,8 @@ summary:focus-visible{
 
 .lado-detail-inhoud p{
   margin:0;
-  color:#334155;
+  color:#000000;
   line-height:1.7;
-}
-
-@media (max-width: 900px){
-  .lado-grid{
-    grid-template-columns:1fr;
-    gap:1.5rem;
-  }
-
-  .lado-kaart,
-  .lado-summary{
-    min-height:auto;
-  }
-
-  .lado-summary{
-    padding-right:4rem;
-  }
 }
 
 .lado-overzicht{
@@ -1256,29 +1235,37 @@ summary:focus-visible{
 
 .lado-uitleg{
   margin-bottom:1.5rem;
-  color:#334155;
+  color:#000000;
   line-height:1.6;
 }
 
 .lado-kolommen{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:1.5rem;
+  gap:2rem;
   align-items:start;
 }
 
 .lado-kolom{
   display:flex;
   flex-direction:column;
-  gap:1rem;
+  gap:1.25rem;
 }
 
 .lado-accordion{
-  border:1px solid #dbe3ea;
+  border:1.5px solid #dbe3ea;
   border-radius:1rem;
-  background:#fff;
+  background:#ffffff;
+  color:#111827;
   overflow:hidden;
   box-shadow:0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.lado-accordion:hover{
+  background:#eaf3ff;
+  border-color:#0058c2;
+  box-shadow:0 12px 28px rgba(0, 88, 194, 0.16);
+  transform:translateY(-3px);
 }
 
 .lado-accordion summary{
@@ -1287,22 +1274,20 @@ summary:focus-visible{
   padding:1.1rem 3.2rem 1.1rem 1.25rem;
   font-weight:700;
   font-size:1rem;
-  color:#102033;
+  color:#111827;
   position:relative;
 }
 
-@media (prefers-reduced-motion: no-preference){
-  .lado-accordion summary{
-    transition:background 0.2s ease;
-  }
+.lado-accordion:hover summary{
+  color:#0058c2;
+}
+
+.lado-accordion summary:hover{
+  background:transparent;
 }
 
 .lado-accordion summary::-webkit-details-marker{
   display:none;
-}
-
-.lado-accordion summary:hover{
-  background:#f7fafc;
 }
 
 .lado-accordion summary::after{
@@ -1314,6 +1299,10 @@ summary:focus-visible{
   font-size:1.4rem;
   font-weight:400;
   color:#1d4ed8;
+}
+
+.lado-accordion:hover summary::after{
+  color:#0058c2;
 }
 
 .lado-accordion[open] summary::after{
@@ -1335,12 +1324,45 @@ summary:focus-visible{
   padding-bottom:1.25rem;
 }
 
+@media (prefers-reduced-motion: no-preference){
+  .lado-kaart,
+  .lado-accordion{
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .plus::before,
+  .plus::after,
+  .lado-accordion summary,
+  .lado-accordion summary::after{
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+}
+
 @media (max-width: 900px){
+  .lado-grid{
+    grid-template-columns:1fr;
+    gap:1.5rem;
+  }
+
+  .lado-kaart,
+  .lado-summary{
+    min-height:auto;
+  }
+
+  .lado-summary{
+    padding-right:4rem;
+  }
+
   .lado-kolommen{
     grid-template-columns:1fr;
   }
 }
-
 
 /* 14) TALENT AWARD PAGINA */
 
@@ -1966,8 +1988,6 @@ summary:focus-visible{
   .nieuws-kaart,
   .genomineerde-kaart,
   .genomineerde-detail-kaart,
-  .lado-kaart,
-  .lado-accordion,
   .talent-award-pagina .genomineerde-kaart{
     background:#001F44;
     color:#FAFAFA;
@@ -1977,9 +1997,6 @@ summary:focus-visible{
   .nieuws-inhoud p,
   .kaart-inhoud p,
   .detail-inhoud p,
-  .lado-detail-inhoud p,
-  .lado-uitleg,
-  .lado-accordion p,
   .nieuws-meta{
     color:#C4D0DC;
   }
