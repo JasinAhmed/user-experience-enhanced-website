@@ -11,19 +11,41 @@
 
   <article class="genomineerde-detail-kaart">
     <figure class="detail-afbeelding">
+
       {% if nominee.profile_picture %}
-        <img
-          src="https://fdnd-agency.directus.app/assets/{{ nominee.profile_picture }}"
-          alt="Profielfoto van {{ nominee.title }}"
-          width="500"
-          height="500">
+        <!-- 🔥 DIRECTUS IMAGE -->
+        <picture>
+
+          <!-- AVIF -->
+          <source
+            type="image/avif"
+            srcset="https://fdnd-agency.directus.app/assets/{{ nominee.profile_picture }}?format=avif">
+
+          <!-- WebP -->
+          <source
+            type="image/webp"
+            srcset="https://fdnd-agency.directus.app/assets/{{ nominee.profile_picture }}?format=webp">
+
+          <!-- Fallback -->
+          <img
+            src="https://fdnd-agency.directus.app/assets/{{ nominee.profile_picture }}"
+            alt="Profielfoto van {{ nominee.title }}"
+            width="500"
+            height="500"
+            loading="lazy">
+
+        </picture>
+
       {% else %}
+        <!-- 🔹 LOKALE FALLBACK -->
         <img
           src="/style/assets/fotothijs.jpg"
           alt="Profielfoto van {{ nominee.title }}"
           width="500"
-          height="500">
+          height="500"
+          loading="lazy">
       {% endif %}
+
     </figure>
 
     <section class="detail-inhoud">
@@ -72,37 +94,19 @@
 
         <section>
           <h3>Nominatie Hogeschool</h3>
-          <p>
-            Thijs is een student op wie wij enorm trots zijn...
-          </p>
-          <p>
-            In samenwerking met medestudenten...
-          </p>
-          <p>
-            Zijn integriteit is hierin opvallend...
-          </p>
-          <p>
-            Deze houding is van grote waarde...
-          </p>
-          <p>
-            Wat Thijs daarnaast onderscheidt...
-          </p>
-          <p>
-            Dat maakt hem in onze ogen...
-          </p>
-          <p>
-            <strong>Fransien Hummel</strong>
-          </p>
+          <p>Thijs is een student op wie wij enorm trots zijn...</p>
+          <p>In samenwerking met medestudenten...</p>
+          <p>Zijn integriteit is hierin opvallend...</p>
+          <p>Deze houding is van grote waarde...</p>
+          <p>Wat Thijs daarnaast onderscheidt...</p>
+          <p>Dat maakt hem in onze ogen...</p>
+          <p><strong>Fransien Hummel</strong></p>
         </section>
 
         <section>
           <h3>Aanbeveling externe stakeholder</h3>
-          <p>
-            "Thijs heeft alles op orde..."
-          </p>
-          <p>
-            "Thijs legt makkelijk contact..."
-          </p>
+          <p>"Thijs heeft alles op orde..."</p>
+          <p>"Thijs legt makkelijk contact..."</p>
           <p><strong>Lisa van Zuilen</strong></p>
         </section>
       </section>
@@ -124,7 +128,14 @@
 
         <button type="submit" class="knop-cta reactie-knop">
           <span class="knop-tekst">Verstuur</span>
-          <img src="/style/assets/sublogo.png" alt="" class="knop-logo" width="20" height="20">
+
+          <!-- 🔹 LOKALE ICON → GEWOON IMG -->
+          <img
+            src="/style/assets/sublogo.png"
+            alt=""
+            class="knop-logo"
+            width="20"
+            height="20">
         </button>
 
         <p class="success-melding" id="success-melding">
