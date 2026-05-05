@@ -19,12 +19,9 @@
       </p>
     </div>
 
+
     <figure class="hero-afbeelding">
-      <img
-        src="/style/assets/bannerpic.jpg"
-        alt="Studenten werken samen tijdens een Associate Degree opleiding"
-        width="1100"
-        height="700">
+      <img src="/style/assets/bannerpic.jpg" alt="Studenten werken samen tijdens een Associate Degree opleiding"width="1100"height="700">
     </figure>
   </section>
 
@@ -44,20 +41,31 @@
             {% assign geldige_nieuwsitems = geldige_nieuwsitems | plus: 1 %}
             <li>
               <article class="nieuws-kaart">
+
                 <figure class="kaart-afbeelding">
-                  {% if item.image %}
-                    <img
-                      src="https://fdnd-agency.directus.app/assets/{{ item.image }}"
-                      alt="Afbeelding bij nieuwsbericht: {{ item.title }}"
-                      width="360"
-                      height="240">
+
+                  {% if item.hero %}
+                    <picture>
+
+                      <!-- 1. AVIF -->
+                      <source
+                        type="image/avif"
+                        srcset="https://fdnd-agency.directus.app/assets/{{ item.hero }}?format=avif">
+
+                      <!-- 2. WebP -->
+                      <source
+                        type="image/webp"
+                        srcset="https://fdnd-agency.directus.app/assets/{{ item.hero }}?format=webp">
+
+                      <!-- 3. Fallback -->
+                      <img src="https://fdnd-agency.directus.app/assets/{{ item.hero }}"alt="Afbeelding bij nieuwsbericht: {{ item.title }}" width="360" height="240" loading="lazy">
+                    </picture>
+
                   {% else %}
-                    <img
-                      src="/style/assets/ad-dag.jpg"
-                      alt="Landelijke Ad-dag evenement met deelnemers"
-                      width="360"
-                      height="240">
+                    <!-- FALLBACK -->
+                    <img src="/style/assets/ad-dag.jpg"alt="Landelijke Ad-dag evenement met deelnemers"width="360"height="240"loading="lazy">
                   {% endif %}
+
                 </figure>
 
                 <div class="nieuws-inhoud">
@@ -85,6 +93,7 @@
                     {% endif %}
                   </p>
                 </div>
+
               </article>
             </li>
           {% endif %}
