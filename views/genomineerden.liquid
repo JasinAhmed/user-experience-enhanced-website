@@ -26,17 +26,29 @@
               <div class="genomineerde-kaart">
                 <figure class="kaart-afbeelding">
                   {% if student.profile_picture %}
-                    <img
-                      src="https://fdnd-agency.directus.app/assets/{{ student.profile_picture }}"
-                      alt="Profielfoto van {{ student.title }}"
-                      width="220"
-                      height="220">
+                    <picture>
+                      <source
+                        type="image/avif"
+                        srcset="https://fdnd-agency.directus.app/assets/{{ student.profile_picture }}?format=avif">
+
+                      <source
+                        type="image/webp"
+                        srcset="https://fdnd-agency.directus.app/assets/{{ student.profile_picture }}?format=webp">
+
+                      <img
+                        src="https://fdnd-agency.directus.app/assets/{{ student.profile_picture }}"
+                        alt="Profielfoto van {{ student.title }}"
+                        width="220"
+                        height="220"
+                        loading="lazy">
+                    </picture>
                   {% else %}
                     <img
                       src="/style/assets/fotothijs.jpg"
                       alt="Profielfoto van {{ student.title }}"
                       width="220"
-                      height="220">
+                      height="220"
+                      loading="lazy">
                   {% endif %}
                 </figure>
 
