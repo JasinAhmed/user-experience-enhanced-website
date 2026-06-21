@@ -2146,6 +2146,7 @@ summary:focus-visible{
 
 .secondary-background .success-melding,
 .secondary-background .error-melding{
+  background-color: green;
   max-width:64rem;
   margin:0 auto 1rem;
 }

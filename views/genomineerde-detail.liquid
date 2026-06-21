@@ -13,7 +13,6 @@
     <figure class="detail-afbeelding">
 
       {% if nominee.profile_picture %}
-        <!-- 🔥 DIRECTUS IMAGE -->
         <picture>
 
           <!-- AVIF -->
@@ -37,7 +36,7 @@
         </picture>
 
       {% else %}
-        <!-- 🔹 LOKALE FALLBACK -->
+        <!-- FALLBACK -->
         <img
           src="/style/assets/fotothijs.jpg"
           alt="Profielfoto van {{ nominee.title }}"
