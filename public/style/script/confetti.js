@@ -1,21 +1,33 @@
-/* Ik maak mijn eigen simpele confetti functie */
+/* Ik maak een functie aan die een confetti-effect laat zien */
 export function startConfetti() {
+
+  /* Met deze for-loop voer ik de code 30 keer uit */
+  /* Hierdoor maak ik 30 confettistukjes aan */
   for (let i = 0; i < 30; i++) {
+
+    /* Ik maak een nieuw span-element aan */
+    /* Elk span-element wordt één confettistukje */
     const confettiStukje = document.createElement('span');
 
-    /* Ik geef elk stukje de confetti class */
+    /* Ik voeg de class confetti toe */
+    /* Hierdoor krijgt het stukje de juiste CSS-stijl en animatie */
     confettiStukje.classList.add('confetti');
 
-    /* Ik zet elk stukje op een willekeurige plek bovenaan het scherm */
+    /* Met Math.random() geef ik elk stukje een willekeurige positie */
+    /* Hierdoor verschijnen de stukjes verspreid over de breedte van het scherm */
     confettiStukje.style.left = Math.random() * 100 + 'vw';
 
-    /* Ik geef elk stukje een kleine random vertraging */
+    /* Met Math.random() geef ik elk stukje een kleine willekeurige vertraging */
+    /* Hierdoor vallen niet alle stukjes precies tegelijk */
     confettiStukje.style.animationDelay = Math.random() * 0.5 + 's';
 
-    /* Ik voeg de confetti toe aan de pagina */
+    /* Ik voeg het confettistukje toe aan de body */
+    /* Hierdoor wordt het zichtbaar op de pagina */
     document.body.appendChild(confettiStukje);
 
-    /* Ik verwijder de confetti weer na 3 seconden */
+    /* Met setTimeout wacht ik 3 seconden */
+    /* Daarna verwijder ik het confettistukje weer */
+    /* Zo blijft de pagina netjes en stapelt de confetti zich niet op */
     setTimeout(() => {
       confettiStukje.remove();
     }, 3000);

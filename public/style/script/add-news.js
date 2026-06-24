@@ -13,63 +13,46 @@ if (nieuwsForm) {
   // Als ik submit
   nieuwsForm.addEventListener('submit', async function (event) {
 
-    // Geen reload
+    // Geen pagina refresh
     event.preventDefault()
 
-    // Reset foutmelding
+    // Foutmelding verbergen
     foutMelding.hidden = true
-    foutMelding.classList.remove('zichtbaar')
 
     // Loading state
-    nieuwsKnop.classList.add('loading')
     nieuwsKnop.disabled = true
     nieuwsKnop.textContent = 'Nieuws plaatsen...'
 
-    // Data ophalen
+    // Formuliergegevens ophalen
     const formData = new FormData(nieuwsForm)
 
-    try {
-      // Versturen
-      const response = await fetch(nieuwsForm.action, {
-        method: nieuwsForm.method,
-        body: new URLSearchParams(formData)
-      })
+    // Request versturen
+    const response = await fetch(nieuwsForm.action, {
+      method: nieuwsForm.method,
+      body: new URLSearchParams(formData)
+    })
 
-      // Loading uit
-      nieuwsKnop.classList.remove('loading')
+    // Gelukt
+    if (response.ok) {
 
-      // SUCCESS
-      if (response.ok) {
+      nieuwsKnop.textContent = 'Gelukt ✅'
 
-        nieuwsKnop.classList.add('success')
-        nieuwsKnop.textContent = 'Gelukt ✅'
+      // Formulier leegmaken
+      nieuwsForm.reset()
 
-        // Form reset
-        nieuwsForm.reset()
+      setTimeout(function () {
+        nieuwsKnop.disabled = false
+        nieuwsKnop.textContent = 'Verzenden'
+      }, 2000)
 
-        // Terug naar normaal
-        setTimeout(function () {
-          nieuwsKnop.classList.remove('success')
-          nieuwsKnop.disabled = false
-          nieuwsKnop.textContent = 'Verzenden'
-        }, 2000)
+    } else {
 
-        return
-      }
+      // Foutmelding tonen
+      foutMelding.hidden = false
 
-      // ERROR
-      throw new Error('Niet gelukt')
-
-    } catch (error) {
-
-      // Reset knop
-      nieuwsKnop.classList.remove('loading')
+      // Knop herstellen
       nieuwsKnop.disabled = false
       nieuwsKnop.textContent = 'Verzenden'
-
-      // Toon foutmelding
-      foutMelding.hidden = false
-      foutMelding.classList.add('zichtbaar')
     }
   })
 }
